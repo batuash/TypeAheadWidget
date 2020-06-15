@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-bdVaJa fQuFFF"
+>
+  <div
+    className="appContainer"
+  >
+    <div
+      className="sc-bwzfXH goefya"
+    >
+      <div
+        className="bodyContainer"
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <div
+            className="sc-htpNat hXFfqc"
+          >
+            <div
+              className="typeAheadContainer"
+            >
+              <div
+                className="suggestionsWrapper"
+              >
+                <div
+                  className="suggestions"
+                >
+                  <div
+                    className="textInput"
+                  >
+                    <input
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyUp={[Function]}
+                      placeholder="fruit"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="options"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="inputWrapper"
+          >
+            <input
+              type="submit"
+              value="submit"
+            />
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;

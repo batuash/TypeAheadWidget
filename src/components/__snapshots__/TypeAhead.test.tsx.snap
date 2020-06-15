@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="sc-bdVaJa iedDvB"
+>
+  <div
+    className="typeAheadContainer"
+  >
+    <div
+      className="suggestionsWrapper"
+    >
+      <div
+        className="suggestions"
+      >
+        <div
+          className="textInput"
+        >
+          <input
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyUp={[Function]}
+            placeholder=""
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="options"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

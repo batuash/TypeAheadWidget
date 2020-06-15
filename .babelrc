@@ -1,0 +1,12 @@
+{
+  "env": {
+		"test": {
+      "presets": [["@babel/env"], "@babel/react"],
+			"plugins": ["@babel/proposal-object-rest-spread"]
+    },
+		"development": {
+      "presets": [["@babel/env"], "@babel/react"],
+			"plugins": ["@babel/proposal-object-rest-spread"]
+    }
+  }
+}
