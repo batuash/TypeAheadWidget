@@ -69,6 +69,16 @@ const reducer = (state, { type, ...payload }) => {
         ...state,
         options: newOptions,
       };
+    case "SET_MOUSE_ENTER_OPTIONS":
+      return {
+        ...state,
+        isMouseOverOptions: true,
+      };
+    case "SET_MOUSE_LEAVE_OPTIONS":
+      return {
+        ...state,
+        isMouseOverOptions: false,
+      };
 
     default:
       return { ...state };
@@ -81,7 +91,14 @@ const TypeAhead: React.FunctionComponent<TypeAheadProps> = ({
   onChange,
 }) => {
   const [
-    { input, intermediateInput, isFocused, selectedOption, options },
+    {
+      input,
+      intermediateInput,
+      isFocused,
+      selectedOption,
+      options,
+      isMouseOverOptions,
+    },
     dispatch,
   ] = useReducer(reducer, {
     input: value,
@@ -89,9 +106,9 @@ const TypeAhead: React.FunctionComponent<TypeAheadProps> = ({
     isFocused: false,
     selectedOption: 0,
     options: [],
+    isMouseOverOptions: false,
   });
   const termsList = useTermsList();
-
   useEffect(() => {
     !isFocused && onChange && onChange(input);
   }, [isFocused]);
@@ -127,16 +144,20 @@ const TypeAhead: React.FunctionComponent<TypeAheadProps> = ({
     dispatch({ type: "SET_FOCUS" });
   };
   const onBlurHandler = (e) => {
-    setTimeout(() => {
-      dispatch({ type: "SET_BLUR" });
-      e.preventDefault();
-    }, 1000);
+    !isMouseOverOptions && dispatch({ type: "SET_BLUR" });
   };
   const onOptionSelected = (value) => () => {
     dispatch({ type: "SET_INPUT", input: value });
+    dispatch({ type: "SET_BLUR" });
   };
-  const handleOnMouseEnter = (selectedOption) => () => {
+  const handleOnMouseEnterOption = (selectedOption) => () => {
     dispatch({ type: "SET_INTERMEDIATE_INPUT", selectedOption });
+  };
+  const handleOnMouseEnterOptions = (e) => {
+    dispatch({ type: "SET_MOUSE_ENTER_OPTIONS" });
+  };
+  const handleOnMouseLeaveOptions = (e) => {
+    dispatch({ type: "SET_MOUSE_LEAVE_OPTIONS" });
   };
 
   // render section
@@ -170,7 +191,11 @@ const TypeAhead: React.FunctionComponent<TypeAheadProps> = ({
               onBlur={onBlurHandler}
             />
           </div>
-          <div className="options">
+          <div
+            className="options"
+            onMouseEnter={handleOnMouseEnterOptions}
+            onMouseLeave={handleOnMouseLeaveOptions}
+          >
             {options.map((option, index) => (
               <span
                 key={`${index}_${option}`}
@@ -178,7 +203,7 @@ const TypeAhead: React.FunctionComponent<TypeAheadProps> = ({
                   index === selectedOption ? "highlight" : ""
                 }`}
                 onClick={onOptionSelected(option)}
-                onMouseEnter={handleOnMouseEnter(index)}
+                onMouseEnter={handleOnMouseEnterOption(index)}
               >
                 {renderOption(option)}
               </span>
